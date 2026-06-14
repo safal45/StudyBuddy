@@ -78,7 +78,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # HTTPS security settings — only active in production (when DEBUG=False)
 if not DEBUG:
-    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # trust Railway's proxy
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     SECURE_HSTS_SECONDS = 31536000
