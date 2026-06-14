@@ -19,15 +19,6 @@
         <div class="layout__body">
           <form class="form" action="" method="POST">
             {% csrf_token %}
-<!--now we want to selct topic by choice not from slider  -->
-
-            <!-- {%for field in form%}
-            <div class="form__group">
-              <label for="room_name">{{field.label}}</label>
-              {{field}} -->
-              <!-- <input id="room_name" name="room_name" type="text" placeholder="E.g. Mastering Python + Django" /> -->
-            <!-- </div>
-            {%endfor%} -->
 
             <div class="form__group">
               <label for="room_topic">Topic Name:</label>
@@ -39,35 +30,21 @@
                   {%endfor%}
                 </select>
               </datalist>
-              </div>
+            </div>
 
             <div class="form__group">
               <label for="room_name">Room Name:</label>
-              {{form.name}} 
-                </div>
-              <div class="form__group">
-              <label for="room_description">Room Name:</label>
-              {{form.description}} 
-              </div>
+              {{form.name}}
+            </div>
 
-            <!-- <div class="form__group">
-              <label for="room_topic">Topic</label>
-              <input required type="text" name="topic" id="room_topic" list="topic-list" />
-              <datalist id="topic-list">
-                <select id="room_topic">
-                  <option value="">Select your topic</option>
-                  <option value="Python">Python</option>
-                  <option value="Django">Django</option>
-                </select>
-              </datalist>
+            <div class="form__group">
+              <label for="room_description">Room Description:</label>
+              {{form.description}}
+            </div>
 
-            </div> -->
-
-
-            
             <div class="form__action">
               <a class="btn btn--dark" href="{%url 'home'%}">Cancel</a>
-              <button class="btn btn--main" type="submit">Create Room</button>
+              <button class="btn btn--main" type="submit">Submit</button>
             </div>
           </form>
         </div>

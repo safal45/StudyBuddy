@@ -2,38 +2,77 @@
 
 {% block content %}
 
-{% if page == 'login'%}
-<div>
-    <form method="POST" action="">
-        {% csrf_token %}
+<main class="auth layout">
+  <div class="container">
+    <div class="layout__box">
 
-        <label>Username:</label>
-        <input type="text" name="username" placeholder="Enter Username"/>
-        <label>Password:</label>
-        <input type="password" name="password" placeholder="Enter Password"/>
-        <input type="submit" value="login"/>
+      <div class="layout__boxHeader">
+        <div class="layout__boxTitle">
+          <h3>{% if page == 'login' %}Login{% else %}Register{% endif %}</h3>
+        </div>
+      </div>
 
-    </form>
-    <p>Hevant register yet?</p>
-    <a href="{% url 'register' %}">Sign up</a>
-</div>
-{% else %}
-<div>
-    <form method="POST" action="">
-        {% csrf_token %}
+      <div class="layout__body">
 
-         {{form.as_p}}
+        <p class="auth__tagline">
+          {% if page == 'login' %}
+            Sign in to join the conversation
+          {% else %}
+            Create your account to get started
+          {% endif %}
+        </p>
 
-        <input type="submit" value="Register"/>
+        {% if page == 'login' %}
 
-    </form>
-    <p>Already have an account?</p>
-    <a href="{% url 'login' %}">Sign in</a>
-</div>
+        <form method="POST" action="" class="form">
+          {% csrf_token %}
+          <div class="form__group">
+            <label>Username</label>
+            <input type="text" name="username" placeholder="Enter username" />
+          </div>
+          <div class="form__group">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter password" />
+          </div>
+          <div class="form__action">
+            <button class="btn btn--main" type="submit">Login</button>
+          </div>
+        </form>
 
+        <div class="auth__action">
+          <p>Haven't registered yet? <a href="{% url 'register' %}">Sign up</a></p>
+        </div>
 
-{% endif %}
+        {% else %}
 
+        <form method="POST" action="" class="form">
+          {% csrf_token %}
+          {% for field in form %}
+          <div class="form__group">
+            <label>{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+            <small style="color: var(--color-gray); font-size: 1.1rem; display:block; margin-top: 0.4rem;">{{ field.help_text }}</small>
+            {% endif %}
+            {% if field.errors %}
+            <small style="color: var(--color-danger, #f00); font-size: 1.2rem; display:block; margin-top: 0.4rem;">{{ field.errors|join:", " }}</small>
+            {% endif %}
+          </div>
+          {% endfor %}
+          <div class="form__action">
+            <button class="btn btn--main" type="submit">Create Account</button>
+          </div>
+        </form>
 
+        <div class="auth__action">
+          <p>Already have an account? <a href="{% url 'login' %}">Sign in</a></p>
+        </div>
 
-{% endblock content%}
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock content %}
